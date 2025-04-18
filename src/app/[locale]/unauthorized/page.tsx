@@ -1,8 +1,10 @@
 'use client'
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useI18n } from "../../../../locales/client";
 
 export default function UnauthorizedPage() {
+  const t = useI18n();
   const router = useRouter();
 
   useEffect(() => {
@@ -16,12 +18,20 @@ export default function UnauthorizedPage() {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-xl p-10 max-w-md text-center">
-        <h1 className="text-3xl font-bold text-red-600 mb-4">Accès refusé</h1>
-        <p className="text-gray-700 mb-6">
-          Vous serez redirigé vers l’accueil dans quelques secondes...
+        <h1 className="text-3xl font-bold text-red-600 mb-4">
+          {t('Unauthorized.title')}
+        </h1>
+        <p className="text-gray-700 mb-2">
+          {t('Unauthorized.message')}
         </p>
-        <a href="/" className="text-blue-500 hover:underline">
-          Retour manuel
+        <p className="text-gray-700 mb-6">
+          {t('Unauthorized.redirect')}
+        </p>
+        <a 
+          href="/" 
+          className="text-blue-500 hover:underline transition-colors"
+        >
+          {t('Unauthorized.manualReturn')}
         </a>
       </div>
     </div>

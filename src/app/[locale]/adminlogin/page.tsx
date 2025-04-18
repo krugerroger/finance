@@ -39,7 +39,7 @@ export default function AdminLogin() {
         .single()
 
       // 4. Redirection si tout est valide
-      router.push("/admin/adminpage/manageusers")
+      router.push("/admin/manageusers")
 
     } catch (error: any) {
       console.error("Erreur de connexion:", error)

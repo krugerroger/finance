@@ -19,7 +19,7 @@ export default async function HeroSection() {
           </p>
           <div className="flex sm:flex-row space-y-4 sm:space-y-0 space-x-4">
             <Link href="/login"><Button className='bg-indigo-800 hover:bg-indigo-900 p-6'>{t('HeroSection.login')}</Button></Link>
-            <Link href="/login"><Button className='bg-white hover:bg-gray-200 text-black p-6'>{t('HeroSection.register')}</Button></Link>
+            <Link href="/register"><Button className='bg-white hover:bg-gray-200 text-black p-6'>{t('HeroSection.register')}</Button></Link>
           </div>
         </div>
       </div>

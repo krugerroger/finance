@@ -335,6 +335,255 @@ export default {
           error: "Ocorreu um erro ao adicionar a conta bancária"
         }
       },
-      
+      RecipientListPage: {
+        title: "Liste der Empfangskonten",
+        addButton: "Begünstigten hinzufügen",
+        table: {
+          caption: "Liste der Empfangskonten",
+          headers: {
+            check: "Bestätigung",
+            info: "Informationen",
+            recipient: "Begünstigter",
+            date: "Datum"
+          }
+        }
+      },Rib: {
+        title: "Dados bancários",
+        notice1:
+          "É importante observar que as informações bancárias abaixo são fornecidas exclusivamente para facilitar transferências de fundos para sua conta. Essas informações são confidenciais e devem ser tratadas com o máximo cuidado.",
+        table: {
+          bankName: "Nome do banco",
+          accountNumber: "Número da conta",
+          ribKey: "Chave RIB",
+          iban: "Iban",
+          swiftCode: "Código Swift/Bic"
+        },
+        notice2:
+          "Ao usar essas informações, você pode realizar transferências de fundos de uma conta bancária de terceiros para a sua. Certifique-se de compartilhá-las apenas com fontes confiáveis e de tomar todas as precauções necessárias para proteger sua confidencialidade.",
+        notice3:
+          "Ao efetuar uma transferência, siga atentamente as instruções fornecidas pelo sistema ou pela instituição financeira. Verifique cuidadosamente os dados do beneficiário, incluindo o nome e as informações da conta, para evitar erros de transferência.",
+        notice4:
+          "Recomendamos também que você mantenha um registro de todas as transações realizadas e verifique regularmente sua conta para garantir que os fundos tenham sido creditados corretamente.",
+        notice5:
+          "Observe que não somos responsáveis por erros de transferência ou uso indevido de suas informações bancárias. É sua responsabilidade proteger suas informações pessoais e tomar as medidas necessárias para garantir a segurança das transações.",
+        notice6:
+          "Se você tiver dúvidas ou preocupações sobre o uso dessas informações bancárias ou notar alguma atividade suspeita em sua conta, entre em contato conosco imediatamente. Nossa equipe está disponível para ajudar e garantir a segurança da sua conta.",
+        notice7:
+          "Agradecemos a sua confiança e estamos comprometidos em garantir a segurança e a confidencialidade das suas informações bancárias."
+      },
+      // pt.ts
+Transactions: {
+  title: "Lista de contas para recebimento de fundos.",
+  addRecipient: "Adicionar beneficiário",
+  caption: "Suas diferentes transações",
+  label: "Descrição",
+  type: "Crédito/Débito",
+  time: "Hora",
+  accountOpening: "Abertura de conta",
+  credit: "Crédito",
+},
+TransferProgress: {
+  initialization: "Inicialização",
+  inProgress: "Em processamento",
+  completed: "Transferência concluída"
+},
+Transfer: {
+  newTransfer: "Nova transferência",
+  method: "Método",
+  amount: "Montante",
+  confirmation: "Confirmação",
+  transferMethod: "Método de transferência",
+  bankAccount: "Conta bancária",
+  bankCard: "Cartão Bancário",
+  recipientAccount: "Conta beneficiária",
+  selectRecipient: "Selecione uma conta beneficiária",
+  noRecipients: "Nenhum beneficiário registado",
+  addNewRecipient: "Adicionar novo beneficiário",
+  verificationTime: "A adição de um novo beneficiário pode levar 24 a 72 horas para verificação.",
+  registeredCards: "Cartões registados",
+  selectCard: "Selecione um cartão",
+  noCards: "Nenhum cartão registado",
+  addNewCard: "Adicionar novo cartão",
+  addPaypalAccount: "Adicionar conta PayPal",
+  selectPaypalAccount: "Selecionar conta PayPal",
+  noPaypalAccount: "Nenhuma conta PayPal registrada",
+  sourceAccount: "Conta de origem",
+  availableBalance: "Saldo disponível",
+  transferAmount: "Montante a transferir",
+  minimum: "Mínimo",
+  maximum: "Máximo",
+  confirmTransfer: "Confirmar transferência de €{amount}",
+  validating: "Validação em curso...",
+  terms: "Ao confirmar, aceita os nossos termos e condições."
+},
+Errors: {
+  amount: {
+    invalid: "Por favor insira um valor válido",
+    insufficient: "O valor não pode exceder o saldo (€ {balance})",
+    minimum: "O valor mínimo é de 10€"
+  },
+  form: {
+    recipientRequired: "Por favor selecione uma conta de beneficiario",
+    cardRequired: "Por favor selecione uma cartão",
+    paypalRequired: "Por favor selecione uma conta Paypal",
+    paypalEmail: "Por favor insira um email Paypal válido",
+    transferError: "Ocorreu um erro durante a transferência. Por favor, tente novamente"
+  }
+},
+Toast: {
+  paypalSuccess: "Conta Paypal adicionada com sucesso",
+  paypalDescription: "Sua conta Paypal {email} foi registrada",
+  transferSuccess: "Transferência iniciada com sucesso",
+  transferDescription: "Sua transferência de {amount}€ foi registrada",
+  insufficientBalance: "Saldo insuficiente",
+  insufficientDescription: "Seu saldo não é suficiente para realizar esta transferência",
+  pendingTransfer: "Transferência em andamento",
+  pendingDescription: "Você já tem uma transferência em andamento",
+  transferError: "Erro durante a transferência",
+  errorDescription: "Ocorreu um erro durante o registro"
+},
+TransferDetail: {
+  title: "Transferência bancária n° {transferId}",
+  progress: {
+    initialization: "Inicialização",
+    inProgress: "Em processamento",
+    completed: "Transferência concluída"
+  },
+  withdrawalTitle: "Retirada de fundos destinada a:",
+  bankDetails: {
+    bankName: "Nome do banco",
+    iban: "IBAN",
+    swiftBic: "Código Swift/BIC"
+  },
+  cardDetails: {
+    card: "Cartão",
+    expiration: "Data de validade"
+  },
+  paypalDetails: {
+    email: "Endereço PayPal"
+  },
+  amount: {
+    title: "Montante da transferência",
+    received: "Você receberá o equivalente a {amount} em sua conta no final desta transação"
+  },
+  otp: {
+    title: "Digite o código de transferência",
+    instructions: "Para confirmar o pagamento de {fee} relacionados à esta transação, digite o código que você recebeu do seu gerente de contas. Este código foi fornecido por razões de segurança para validar sua solicitação de retirada de fundos e garantir que você é o titular autorizado da conta.",
+    confirmButton: "Confirmar"
+  },
+  fees: {
+    title: "Taxas de transação",
+    commission: "TAXA DE BANCO",
+    total: "Total",
+    bankFeesTitle: "Taxas de banco",
+    bankFeesDescription: "TAXA DE BANCO, QUE SERÁ PAGA PARA {fee}",
+    contactButton: "Contatar o gerente de contas"
+  },
+  errors: {
+    noBankAccount: "Por favor, adicione um banco",
+    noCard: "Por favor, adicione uma cartão"
+  },
+  toast: {
+    success: "Sucesso",
+    successDescription: "Código de transferência validado com sucesso",
+    error: "Erro",
+    errorDescription: "Código incorreto"
+  }
+},
+TransferHistory: {
+  title: "Histórico de transferências",
+  tableCaption: "Histórico de transferências",
+  headers: {
+    status: "Status",
+    amount: "Montante",
+    details: "Detalhes",
+    recipient: "Beneficiário"
+  },
+  status: {
+    completed: "Concluído",
+    pending: "Pendente",
+    failed: "Falhou"
+  }
+},
+Registration: {
+  title: "Abrir uma conta",
+  description: "Junte-se ao Banque Paribas abrindo sua conta bancária online ou em uma de nossas agências. Gerencie sua situação financeira e atividades enquanto beneficia dos conselhos de nossos especialistas.",
+  steps: {
+    personalInfo: "Informações pessoais",
+    accountInfo: "Informações da conta"
+  },
+  form: {
+    firstName: "Nome",
+    lastName: "Sobrenome",
+    phone: "Número de telefone",
+    email: "Email",
+    gender: "Gênero",
+    birthDate: "Data de nascimento",
+    country: "País",
+    city: "Cidade",
+    address: "Endereço",
+    accountType: "Tipo de conta",
+    currency: "Moeda",
+    language: "Idioma falado",
+    password: "Senha",
+    confirmPassword: "Confirmar senha",
+    genderOptions: {
+      male: "Masculino",
+      female: "Feminino",
+      other: "Outro"
+    },
+    accountTypeOptions: {
+      savings: "Conta poupança",
+      current: "Conta corrente",
+      business: "Conta empresarial"
+    },
+    nextButton: "Próximo passo",
+    previousButton: "Passo anterior",
+    submitButton: "Criar conta",
+    submitting: "Criando conta..."
+  },
+  errors: {
+    requiredFields: "Por favor preencha todos os campos obrigatórios",
+    invalidPhone: "Por favor insira um número de telefone válido",
+    passwordMismatch: "As senhas não coincidem",
+    registrationError: "Ocorreu um erro durante o registro"
+  },
+  success: {
+    title: "Registro enviado para validação",
+    message: "Seu registro foi enviado com sucesso. Você receberá um e-mail de confirmação assim que sua conta for validada."
+  },
+  privacyPolicy: "Usamos as informações que você fornece para fins de gestão e administração, bem como para mantê-lo informado por correio, telefone, e-mail e SMS sobre outros produtos e serviços nossos. Você pode gerenciar suas preferências proativamente ou optar por não se comunicar conosco a qualquer momento. Você tem o direito de acessar seus dados que mantemos ou solicitar sua exclusão. Para mais detalhes, consulte nossa {privacyPolicy}."
+},
+Unauthorized: {
+  title: "Acesso negado",
+  message: "Você não tem as permissões necessárias para acessar esta página.",
+  redirect: "Você será redirecionado para a página inicial em alguns segundos...",
+  manualReturn: "Retorno manual à página inicial"
+},
+CustomerHeader: {
+  loading: "Carregando...",
+  notConnected: "Usuário não conectado",
+  contactInfo: {
+    email: "financeassurance908@gmail.com",
+    phone: "+33 7 74 87 02 10"
+  },
+  logout: "Sair",
+  menuItems: {
+    profile: "Perfil",
+    phone: "Telefone",
+    email: "Email",
+    debitCard: "Cartão de débito",
+    transfer: "Transferência"
+  },
+  accountSection: {
+    accountNumber: "Número da conta",
+    balance: "Saldo",
+    accountType: "Conta corrente",
+    lastViewed: "Visto em: {date}"
+  }
+},
+
+
+
   } as const
   

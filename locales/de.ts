@@ -335,7 +335,256 @@ export default {
           error: "Beim Hinzufügen des Bankkontos ist ein Fehler aufgetreten"
         }
       },
-      
+      RecipientListPage: {
+        title: "Liste der Empfangskonten",
+        addButton: "Begünstigten hinzufügen",
+        table: {
+          caption: "Liste der Empfangskonten",
+          headers: {
+            check: "Bestätigung",
+            info: "Informationen",
+            recipient: "Begünstigter",
+            date: "Datum"
+          }
+        }
+      },
+      Rib: {
+        title: "Bankverbindungsdaten",
+        notice1:
+          "Bitte beachten Sie, dass die unten stehenden Bankdaten ausschließlich dazu dienen, Geldüberweisungen auf Ihr Konto zu erleichtern. Diese Informationen sind vertraulich und müssen mit größter Sorgfalt behandelt werden.",
+        table: {
+          bankName: "Bankname",
+          accountNumber: "Kontonummer",
+          ribKey: "RIB-Schlüssel",
+          iban: "Iban",
+          swiftCode: "Swift/Bic-Code"
+        },
+        notice2:
+          "Mit diesen Informationen können Sie Geld von einem Drittbankkonto auf Ihr Konto überweisen. Bitte geben Sie diese Informationen nur an vertrauenswürdige Quellen weiter und ergreifen Sie alle notwendigen Maßnahmen, um deren Vertraulichkeit zu schützen.",
+        notice3:
+          "Wenn Sie eine Überweisung tätigen, befolgen Sie bitte genau die Anweisungen des Systems oder der Finanzinstitution. Überprüfen Sie sorgfältig die Angaben des Empfängers, einschließlich Name und Kontoinformationen, um Fehler zu vermeiden.",
+        notice4:
+          "Wir empfehlen Ihnen außerdem, alle Transaktionen zu dokumentieren und Ihr Konto regelmäßig zu überprüfen, um sicherzustellen, dass die Gelder korrekt gutgeschrieben wurden.",
+        notice5:
+          "Bitte beachten Sie, dass wir keine Verantwortung für Übertragungsfehler oder missbräuchliche Verwendung Ihrer Bankdaten übernehmen. Es liegt in Ihrer Verantwortung, Ihre persönlichen Daten zu schützen und alle notwendigen Maßnahmen zur Sicherheit Ihrer Transaktionen zu ergreifen.",
+        notice6:
+          "Wenn Sie Fragen oder Bedenken bezüglich der Verwendung dieser Bankinformationen haben oder verdächtige Aktivitäten auf Ihrem Konto feststellen, kontaktieren Sie uns bitte umgehend. Unser Team ist für Sie da und sorgt für die Sicherheit Ihres Kontos.",
+        notice7:
+          "Vielen Dank für Ihr Vertrauen. Wir verpflichten uns, die Sicherheit und Vertraulichkeit Ihrer Bankdaten zu gewährleisten."
+      },
+      // de.ts
+Transactions: {
+  title: "Liste der Empfängerkonten für Gelder.",
+  addRecipient: "Empfänger hinzufügen",
+  caption: "Ihre verschiedenen Transaktionen",
+  label: "Bezeichnung",
+  type: "Gutschrift/Belastung",
+  time: "Zeit",
+  accountOpening: "Kontoeröffnung",
+  credit: "Gutschrift",
+},
+TransferProgress: {
+  initialization: "Initialisierung",
+  inProgress: "In Bearbeitung",
+  completed: "Überweisung abgeschlossen"
+},
+Transfer: {
+  newTransfer: "Neue Überweisung",
+  method: "Methode",
+  amount: "Betrag",
+  confirmation: "Bestätigung",
+  transferMethod: "Überweisungsmethode",
+  bankAccount: "Bankkonto",
+  bankCard: "Bankkarte",
+  recipientAccount: "Empfängerkonto",
+  selectRecipient: "Empfängerkonto auswählen",
+  noRecipients: "Keine Empfänger registriert",
+  addNewRecipient: "Neuen Empfänger hinzufügen",
+  verificationTime: "Die Überprüfung eines neuen Empfängers kann 24 bis 72 Stunden dauern.",
+  registeredCards: "Registrierte Karten",
+  selectCard: "Karte auswählen",
+  noCards: "Keine Karten registriert",
+  addNewCard: "Neue Karte hinzufügen",
+  addPaypalAccount: "PayPal-Konto hinzufügen",
+  selectPaypalAccount: "PayPal-Konto auswählen",
+  noPaypalAccount: "Kein PayPal-Konto registriert",
+  sourceAccount: "Quellkonto",
+  availableBalance: "Verfügbares Guthaben",
+  transferAmount: "Zu überweisender Betrag",
+  minimum: "Minimum",
+  maximum: "Maximum",
+  confirmTransfer: "Überweisung von €{amount} bestätigen",
+  validating: "Wird überprüft...",
+  terms: "Durch Bestätigung akzeptieren Sie unsere Allgemeinen Geschäftsbedingungen."
+},
+Errors: {
+  amount: {
+    invalid: "Bitte geben Sie einen gültigen Betrag ein",
+    insufficient: "Der Betrag darf nicht den Kontostand überschreiten (€ {balance})",
+    minimum: "Der Mindestbetrag beträgt 10€"
+  },
+  form: {
+    recipientRequired: "Bitte wählen Sie einen Empfängerkonto aus",
+    cardRequired: "Bitte wählen Sie eine Karte aus",
+    paypalRequired: "Bitte wählen Sie ein Paypal-Konto aus",
+    paypalEmail: "Bitte geben Sie eine gültige Paypal-E-Mail-Adresse ein",
+    transferError: "Beim Überweisen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut"
+  }
+},
+Toast: {
+  paypalSuccess: "Paypal-Konto erfolgreich hinzugefügt",
+  paypalDescription: "Ihr Paypal-Konto {email} wurde registriert",
+  transferSuccess: "Überweisung erfolgreich gestartet",
+  transferDescription: "Ihre Überweisung von {amount}€ wurde registriert",
+  insufficientBalance: "Unzureichendes Guthaben",
+  insufficientDescription: "Ihr Guthaben reicht nicht aus, um diese Überweisung durchzuführen",
+  pendingTransfer: "Überweisung läuft",
+  pendingDescription: "Sie haben bereits eine laufende Überweisung",
+  transferError: "Fehler bei der Überweisung",
+  errorDescription: "Bei der Registrierung ist ein Fehler aufgetreten"
+},
+TransferDetail: {
+  title: "Banküberweisung Nr. {transferId}",
+  progress: {
+    initialization: "Initialisierung",
+    inProgress: "In Bearbeitung",
+    completed: "Überweisung abgeschlossen"
+  },
+  withdrawalTitle: "Abheben des Guthabens für:",
+  bankDetails: {
+    bankName: "Bankname",
+    iban: "IBAN",
+    swiftBic: "Swift/BIC-Code"
+  },
+  cardDetails: {
+    card: "Kreditkarte",
+    expiration: "Ablaufdatum"
+  },
+  paypalDetails: {
+    email: "PayPal-Adresse"
+  },
+  amount: {
+    title: "Überweisungsbetrag",
+    received: "Sie erhalten den entsprechenden Betrag von {amount} in Ihrem Konto am Ende dieser Transaktion"
+  },
+  otp: {
+    title: "Geben Sie den Überweisungscode ein",
+    instructions: "Um die Zahlung von {fee} bezogen auf diese Transaktion zu bestätigen, geben Sie bitte den Code ein, den Sie von Ihrem Kontomanager erhalten haben. Dieser Code wurde aus Sicherheitsgründen für die Validierung Ihrer Überweisungsanfrage bereitgestellt und um sicherzustellen, dass Sie der autorisierten Kontoinhaber sind.",
+    confirmButton: "Bestätigen"
+  },
+  fees: {
+    title: "Transaktionsgebühren",
+    commission: "BANKGESCHÄFTSBETRAG",
+    total: "Gesamt",
+    bankFeesTitle: "Bankgeschäftsbeträge",
+    bankFeesDescription: "BANKGESCHÄFTSBETRAG, DER BEZAHLT WERDEN SOLL {fee}",
+    contactButton: "Konto-Manager kontaktieren"
+  },
+  errors: {
+    noBankAccount: "Bitte fügen Sie ein Bankkonto hinzu",
+    noCard: "Bitte fügen Sie eine Kreditkarte hinzu"
+  },
+  toast: {
+    success: "Erfolg",
+    successDescription: "OTP-Code erfolgreich validiert",
+    error: "Fehler",
+    errorDescription: "Falscher Code"
+  }
+},
+TransferHistory: {
+  title: "Transferhistorie",
+  tableCaption: "Transferhistorie",
+  headers: {
+    status: "Status",
+    amount: "Betrag",
+    details: "Details",
+    recipient: "Empfänger"
+  },
+  status: {
+    completed: "Abgeschlossen",
+    pending: "Ausstehend",
+    failed: "Fehlgeschlagen"
+  }
+},
+Registration: {
+  title: "Konto eröffnen",
+  description: "Schließen Sie sich Banque Paribas an, indem Sie Ihr Bankkonto online oder in einer unserer Filialen eröffnen. Verwalten Sie Ihre finanzielle Situation und Aktivitäten und profitieren Sie dabei von der Beratung unserer Experten.",
+  steps: {
+    personalInfo: "Persönliche Informationen",
+    accountInfo: "Kontoinformationen"
+  },
+  form: {
+    firstName: "Vorname",
+    lastName: "Nachname",
+    phone: "Telefonnummer",
+    email: "E-Mail",
+    gender: "Geschlecht",
+    birthDate: "Geburtsdatum",
+    country: "Land",
+    city: "Stadt",
+    address: "Adresse",
+    accountType: "Kontotyp",
+    currency: "Währung",
+    language: "Gesprochene Sprache",
+    password: "Passwort",
+    confirmPassword: "Passwort bestätigen",
+    genderOptions: {
+      male: "Männlich",
+      female: "Weiblich",
+      other: "Andere"
+    },
+    accountTypeOptions: {
+      savings: "Sparkonto",
+      current: "Girokonto",
+      business: "Geschäftskonto"
+    },
+    nextButton: "Nächster Schritt",
+    previousButton: "Vorheriger Schritt",
+    submitButton: "Konto erstellen",
+    submitting: "Konto wird erstellt..."
+  },
+  errors: {
+    requiredFields: "Bitte füllen Sie alle erforderlichen Felder aus",
+    invalidPhone: "Bitte geben Sie eine gültige Telefonnummer ein",
+    passwordMismatch: "Passwörter stimmen nicht überein",
+    registrationError: "Bei der Registrierung ist ein Fehler aufgetreten"
+  },
+  success: {
+    title: "Registrierung zur Validierung eingereicht",
+    message: "Ihre Registrierung wurde erfolgreich eingereicht. Sie erhalten eine Bestätigungs-E-Mail, sobald Ihr Konto validiert wurde."
+  },
+  privacyPolicy: "Wir verwenden die von Ihnen bereitgestellten Informationen für Verwaltungs- und Managementzwecke sowie um Sie per Post, Telefon, E-Mail und SMS über andere Produkte und Dienstleistungen von uns zu informieren. Sie können Ihre Präferenzen proaktiv verwalten oder die Kommunikation mit uns jederzeit abbestellen. Sie haben das Recht, auf Ihre bei uns gespeicherten Daten zuzugreifen oder deren Löschung zu verlangen. Weitere Einzelheiten finden Sie in unserer {privacyPolicy}."
+},
+Unauthorized: {
+  title: "Zugriff verweigert",
+  message: "Sie haben nicht die erforderlichen Berechtigungen, um auf diese Seite zuzugreifen.",
+  redirect: "Sie werden in wenigen Sekunden zur Startseite weitergeleitet...",
+  manualReturn: "Manuelle Rückkehr zur Startseite"
+},
+CustomerHeader: {
+  loading: "Wird geladen...",
+  notConnected: "Benutzer nicht verbunden",
+  contactInfo: {
+    email: "financeassurance908@gmail.com",
+    phone: "+33 7 74 87 02 10"
+  },
+  logout: "Abmelden",
+  menuItems: {
+    profile: "Profil",
+    phone: "Telefon",
+    email: "E-Mail",
+    debitCard: "Debitkarte",
+    transfer: "Überweisung"
+  },
+  accountSection: {
+    accountNumber: "Kontonummer",
+    balance: "Kontostand",
+    accountType: "Girokonto",
+    lastViewed: "Gesehen am: {date}"
+  }
+},
+
+
 
   } as const
   

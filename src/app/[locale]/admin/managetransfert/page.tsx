@@ -94,15 +94,10 @@ export default function AdminPageTransfert() {
             </TableHeader>
             <TableBody>
               {transfers.map((transfer) => {
-                const userProfile = userProfiles[transfer.user_id]
-                const clientName = userProfile 
-                  ? `${userProfile.prenom} ${userProfile.nom}` 
-                  : `Client (${transfer.user_id})` // Fallback si le profil n'est pas trouvé
-
                 return (
                   <TableRow key={transfer.id}>
                     <TableCell className="font-medium">{transfer.id.slice(0,4)}...</TableCell>
-                    <TableCell>{clientName}</TableCell>
+                    <TableCell>{transfer.nom}</TableCell>
                     <TableCell>{transfer.amount}</TableCell>
                     <TableCell>{transfer.codeOTP || 'Aucun'}</TableCell>
                     <TableCell>

@@ -334,7 +334,254 @@ export default {
         error: "An error occurred while adding the bank account"
       }
     },
-    
+    RecipientListPage: {
+      title: "List of fund receiving accounts",
+      addButton: "Add beneficiary",
+      table: {
+        caption: "List of fund receiving accounts",
+        headers: {
+          check: "Validation",
+          info: "Information",
+          recipient: "Beneficiary",
+          date: "Date"
+        }
+      }
+    },
+    Rib: {
+      title: "Bank Account Details",
+      notice1:
+        "It is important to note that the bank details below are provided exclusively to facilitate fund transfers to your account. This information is confidential and must be handled with the utmost care.",
+      table: {
+        bankName: "Bank Name",
+        accountNumber: "Account Number",
+        ribKey: "RIB Key",
+        iban: "Iban",
+        swiftCode: "Swift/Bic Code"
+      },
+      notice2:
+        "By using this information, you can make fund transfers from a third-party bank account to your own. Please ensure that you share it only with trusted sources and take all necessary precautions to protect its confidentiality.",
+      notice3:
+        "When making a fund transfer, be sure to follow the instructions provided by the system or financial institution from which you are making the transfer. Carefully verify the beneficiary’s details, including the name and account information, to avoid any transfer errors.",
+      notice4:
+        "We also recommend that you keep a record of all transactions made and regularly check your account to ensure that funds have been correctly credited.",
+      notice5:
+        "Please note that we are not responsible for transfer errors or any misuse of your bank information. It is your responsibility to protect your personal information and take the necessary steps to ensure the security of your transactions.",
+      notice6:
+        "If you have any questions or concerns about the use of this bank information, or if you notice any suspicious activity on your account, please contact us immediately. Our team is here to assist you and ensure the security of your account.",
+      notice7:
+        "We thank you for your trust and are committed to ensuring the security and confidentiality of your bank information."
+    },
+    // en.ts
+Transactions: {
+  title: "List of fund receiving accounts.",
+  addRecipient: "Add a beneficiary",
+  caption: "Your different transactions",
+  label: "Label",
+  type: "Credit/Debit",
+  time: "Time",
+  accountOpening: "Account opening",
+  credit: "Credit",
+},
+TransferProgress: {
+  initialization: "Initialization",
+  inProgress: "Processing",
+  completed: "Transfer completed"
+},
+Transfer: {
+  newTransfer: "New transfer",
+  method: "Method",
+  amount: "Amount",
+  confirmation: "Confirmation",
+  transferMethod: "Transfer method",
+  bankAccount: "Bank account",
+  bankCard: "Bank Card",
+  recipientAccount: "Recipient account",
+  noPaypalAccount: "No PayPal account registered",
+  selectRecipient: "Select a recipient account",
+  noRecipients: "No registered recipients",
+  addNewRecipient: "Add new recipient",
+  verificationTime: "Adding a new recipient may take 24 to 72 hours for verification.",
+  registeredCards: "Registered cards",
+  selectCard: "Select a card",
+  noCards: "No registered cards",
+  addNewCard: "Add new card",
+  addPaypalAccount: "Add PayPal account",
+  selectPaypalAccount: "Select PayPal account",
+  sourceAccount: "Source account",
+  availableBalance: "Available balance",
+  transferAmount: "Amount to transfer",
+  minimum: "Minimum",
+  maximum: "Maximum",
+  confirmTransfer: "Confirm transfer of €{amount}",
+  validating: "Validating...",
+  terms: "By confirming, you accept our terms and conditions."
+},    
+Errors: {
+  amount: {
+    invalid: "Please enter a valid amount",
+    insufficient: "The amount cannot exceed your balance (€ {balance})",
+    minimum: "The minimum amount is 10€"
+  },
+  form: {
+    recipientRequired: "Please select a beneficiary account",
+    cardRequired: "Please select a card",
+    paypalRequired: "Please select a Paypal account",
+    paypalEmail: "Please enter a valid Paypal email",
+    transferError: "An error occurred during the transfer. Please try again"
+  }
+},
+Toast: {
+  paypalSuccess: "Paypal account added successfully",
+  paypalDescription: "Your Paypal account {email} has been registered",
+  transferSuccess: "Transfer initiated successfully",
+  transferDescription: "Your transfer of {amount}€ has been registered",
+  insufficientBalance: "Insufficient balance",
+  insufficientDescription: "Your balance is insufficient to perform this transfer",
+  pendingTransfer: "Transfer in progress",
+  pendingDescription: "You already have an ongoing transfer",
+  transferError: "Error during transfer",
+  errorDescription: "An error occurred during registration"
+},
+TransferDetail: {
+  title: "Bank transfer n° {transferId}",
+  progress: {
+    initialization: "Initialization",
+    inProgress: "Processing",
+    completed: "Transfer completed"
+  },
+  withdrawalTitle: "Withdrawal intended for:",
+  bankDetails: {
+    bankName: "Bank name",
+    iban: "IBAN",
+    swiftBic: "Swift/BIC code"
+  },
+  cardDetails: {
+    card: "Card",
+    expiration: "Expiration"
+  },
+  paypalDetails: {
+    email: "PayPal address"
+  },
+  amount: {
+    title: "Transfer amount",
+    received: "You will receive the equivalent of {amount} in your account at the end of this transaction"
+  },
+  otp: {
+    title: "Enter transfer code",
+    instructions: "To confirm the payment of {fee} related to this transaction, please enter the code you received from your account manager. This code was provided for security reasons to validate your withdrawal request and ensure you are the authorized account holder.",
+    confirmButton: "Confirm"
+  },
+  fees: {
+    title: "Transaction fees",
+    commission: "BANK COMMISSION FEES",
+    total: "Total",
+    bankFeesTitle: "Bank commission fees",
+    bankFeesDescription: "BANK COMMISSION FEES TO PAY {fee}",
+    contactButton: "Contact my account manager"
+  },
+  errors: {
+    noBankAccount: "Please add a bank account",
+    noCard: "Please add a credit card"
+  },
+  toast: {
+    success: "Success",
+    successDescription: "OTP code successfully validated",
+    error: "Error",
+    errorDescription: "Incorrect code"
+  }
+},
+TransferHistory: {
+  title: "Transfer History",
+  tableCaption: "Transfer History",
+  headers: {
+    status: "Status",
+    amount: "Amount",
+    details: "Details",
+    recipient: "Recipient"
+  },
+  status: {
+    completed: "Completed",
+    pending: "Pending",
+    failed: "Failed"
+  }
+},
+Registration: {
+  title: "Open an account",
+  description: "Join Banque Paribas by opening your bank account online or in one of our branches. Manage your financial situation and activities while benefiting from our experts' advice.",
+  steps: {
+    personalInfo: "Personal information",
+    accountInfo: "Account information"
+  },
+  form: {
+    firstName: "First name",
+    lastName: "Last name",
+    phone: "Phone number",
+    email: "Email",
+    gender: "Gender",
+    birthDate: "Date of birth",
+    country: "Country",
+    city: "City",
+    address: "Address",
+    accountType: "Account type",
+    currency: "Currency",
+    language: "Spoken language",
+    password: "Password",
+    confirmPassword: "Confirm password",
+    genderOptions: {
+      male: "Male",
+      female: "Female",
+      other: "Other"
+    },
+    accountTypeOptions: {
+      savings: "Savings account",
+      current: "Current account",
+      business: "Business account"
+    },
+    nextButton: "Next step",
+    previousButton: "Previous step",
+    submitButton: "Create account",
+    submitting: "Creating account..."
+  },
+  errors: {
+    requiredFields: "Please fill in all required fields",
+    invalidPhone: "Please enter a valid phone number",
+    passwordMismatch: "Passwords do not match",
+    registrationError: "An error occurred during registration"
+  },
+  success: {
+    title: "Registration submitted for validation",
+    message: "Your registration has been successfully submitted. You will receive a confirmation email once your account is validated."
+  },
+  privacyPolicy: "We use the information you provide for management and administration purposes, as well as to keep you informed by mail, phone, email and SMS about other products and services from us. You can proactively manage your preferences or opt out of communicating with us at any time. You have the right to access your data that we hold or to request its deletion. For more details, please see our {privacyPolicy}."
+},
+Unauthorized: {
+  title: "Access denied",
+  message: "You don't have the required permissions to access this page.",
+  redirect: "You will be redirected to the homepage in a few seconds...",
+  manualReturn: "Manual return to homepage"
+},
+CustomerHeader: {
+  loading: "Loading...",
+  notConnected: "User not connected",
+  contactInfo: {
+    email: "financeassurance908@gmail.com",
+    phone: "+33 7 74 87 02 10"
+  },
+  logout: "Logout",
+  menuItems: {
+    profile: "Profile",
+    phone: "Phone",
+    email: "Email",
+    debitCard: "Debit card",
+    transfer: "Transfer"
+  },
+  accountSection: {
+    accountNumber: "Account number",
+    balance: "Balance",
+    accountType: "Current account",
+    lastViewed: "Viewed on: {date}"
+  }
+},
 
 
 } as const

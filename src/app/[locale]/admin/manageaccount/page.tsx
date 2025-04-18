@@ -11,7 +11,7 @@ interface Account {
   id: string
   user_id: string
   numero_compte: string
-  nom: string // Nouvelle colonne ajoutée
+  name: string // Nouvelle colonne ajoutée
   solde: number
   frais: number
   monnaie: string
@@ -39,7 +39,7 @@ export default function AdminPage() {
           id,
           user_id,
           numero_compte,
-          nom,
+          name,
           solde,
           frais,
           monnaie,
@@ -63,8 +63,8 @@ export default function AdminPage() {
       const { error } = await supabase
         .from('accounts')
         .update({ 
-          solde: parseFloat(newBalance.toFixed(2)),
-          frais: parseFloat(newFrais.toFixed(2)),
+          solde: newBalance,
+          frais: newFrais,
           updated_at: new Date().toISOString()
         })
         .eq('id', id)
@@ -106,7 +106,7 @@ export default function AdminPage() {
             {accounts.map(account => (
               <TableRow key={account.id}>
                 <TableCell className="font-medium">
-                  {account.nom || `Client ${account.user_id.slice(0, 6)}`}
+                  {account.name || `Client ${account.user_id.slice(0, 6)}`}
                 </TableCell>
                 <TableCell>{account.numero_compte}</TableCell>
                 <TableCell>
@@ -124,7 +124,7 @@ export default function AdminPage() {
                     min="0"
                   />
                 </TableCell>
-                <TableCell>{account.frais.toFixed(2)}</TableCell>
+                <TableCell>{account.frais}</TableCell>
                 <TableCell>
                   <Input
                     type="number"

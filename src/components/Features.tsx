@@ -85,7 +85,7 @@ export default async function Features() {
       </div>
 
       {/* Pourquoi nous choisir */}
-      <div id="why_us" className="container sm:grid sm:grid-cols-3">
+      <div id="why_us" className=" sm:grid sm:grid-cols-3">
         <div className="px-6 py-10 bg-indigo-900 text-white col-span-2">
           <h6 className="text-xs">{t('Features.whyUs.subtitle')}</h6>
           <h1 className="text-4xl font-bold my-5">{t('Features.whyUs.title')}</h1>
@@ -124,7 +124,7 @@ export default async function Features() {
       </div>
 
       {/* Cartes de crédit */}
-      <div id="credit_cards" className="container sm:grid sm:grid-cols-3">
+      <div id="credit_cards" className=" sm:grid sm:grid-cols-3">
         <div className="bg-[url('/img1.jpg')] bg-cover bg-center col-span-1"></div>
         <div className="px-6 py-10 bg-gray-900 text-white col-span-2">
           <h1 className="text-4xl font-bold my-5">{t('Features.creditCards.title')}</h1>

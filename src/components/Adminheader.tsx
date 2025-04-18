@@ -12,6 +12,9 @@ export default function AdminHeader() {
 
   return (
     <div>
+       <div className=" flex justify-center items-center mb-4">
+            <img src="/logo2.png" alt="Finance Logo" className="h-10" />
+        </div>
       <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm mb-4">
         <Button onClick={signout}>Déconnexion</Button>
       </div>

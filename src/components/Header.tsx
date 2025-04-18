@@ -3,12 +3,14 @@ import { EnvelopeIcon, LanguageIcon, MapPinIcon, PhoneIcon } from '@heroicons/re
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { getI18n } from '../../locales/server'
+import { LocaleSelect } from './LocaleSelect'
 
 export default async function Header() {
   const t = await getI18n()
 
   return (
     <header className="bg-white shadow-sm">
+       <LocaleSelect className="fixed top-0 left-0 z-50"/>
       <div className="text-[10px] bg-gray-100 p-2 flex justify-between items-center">
         <div className="flex justify-start">
           <MapPinIcon className="w-4 text-indigo-700" />
