@@ -82,21 +82,22 @@ export default function CustomerHeader() {
       <LocaleSelect className="bg-white ms-auto"/>
       </div>
        <div className="flex justtify-end">
-       <div className="flex items-center gap-1">
-          <EnvelopeIcon className="w-4"/>
-          <span>{t('CustomerHeader.contactInfo.email')}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <PhoneIcon className="w-4"/>
-          <span>{t('CustomerHeader.contactInfo.phone')}</span>
-        </div>
+        <Button onClick={signout}>{t('CustomerHeader.logout')}</Button>
        </div>
       </div>
-      
       <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm mb-4">
         <SidebarTrigger className=" " />
-        <img src="/logo2.png" alt="Finance Logo" className="h-10" />
-        <Button onClick={signout}>{t('CustomerHeader.logout')}</Button>
+        <Link href="/customer/dashboard"><img src="/logo2.png" alt="Finance Logo" className="h-10" /></Link>
+      </div>
+      <div className="text-xs text-gray-500 bg-white p-4 rounded-lg">
+        <div className="flex items-center gap-1">
+            <EnvelopeIcon className="w-4"/>
+            <span>{t('CustomerHeader.contactInfo.email')}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <PhoneIcon className="w-4"/>
+            <span>{t('CustomerHeader.contactInfo.phone')}</span>
+          </div>
       </div>
       
       <div className="space-y-8">

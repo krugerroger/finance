@@ -213,14 +213,14 @@ export default function AddTransfer() {
 
 return (
   <div className="container mx-auto px-4 py-8 max-w-4xl">
-    <div className="flex border rounded-lg mb-8 overflow-hidden text-white">
-      <span className="inline-block bg-indigo-700 text-xl w-1/3 p-4 font-medium">
+    <div className="flex border rounded-lg mb-8 overflow-hidden text-white ">
+      <span className="inline-block text-sm bg-indigo-700 md:text-xl text-center w-1/3 p-2 font-medium">
         {t('TransferProgress.initialization')}
       </span>
-      <span className="inline-block text-xl w-1/3 p-4 bg-gray-900">
+      <span className="inline-block text-sm md:text-xl w-1/3 p-2 text-center bg-gray-900">
         {t('TransferProgress.inProgress')}
       </span>
-      <span className="inline-block text-xl w-1/3 p-4 bg-gray-900">
+      <span className="inline-block text-sm md:text-xl w-1/3 p-2 text-center bg-gray-900">
         {t('TransferProgress.completed')}
       </span>
     </div>
@@ -374,8 +374,9 @@ return (
               <RadioGroup 
                 value={paypalOption} 
                 onValueChange={(value: PaypalOption) => setPaypalOption(value)} 
-                className="grid gap-4 grid-cols-2"
+                className=""
               >
+                <div className="flex flex-col items-center space-y-2 md:flex-row mb-3">
                 <div className="space-y-2">
                   <Label className="flex items-center gap-2">
                     <RadioGroupItem value="add_paypal" id="add_paypal" />
@@ -428,6 +429,7 @@ return (
                     </Select>
                   )}
                 </div>
+                </div>
               </RadioGroup>
             </div>
           )}
@@ -465,7 +467,7 @@ return (
                 <span className="text-gray-500">€</span>
               </div>
               <Input
-                className="pl-8 text-lg py-6"
+                className="pl-8 md:text-lg py-3 md:py-6"
                 value={formState.amount}
                 onChange={e => handleInputChange('amount', e.target.value)}
                 type="number"
@@ -498,7 +500,7 @@ return (
             
             <Button 
               onClick={handleSubmitTransfer}
-              className="w-full py-6 text-lg"
+              className="w-full py-3 text-sm md:text-lg"
               disabled={isSubmitting || !!errors.amount || !formState.amount || (!formState.selectedAccount && selectedMethod === "bank") || (!formState.selectedCard && selectedMethod === "card") || (!formState.selectedPaypal && selectedMethod === "paypal")}
             >
               {isSubmitting ? (

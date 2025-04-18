@@ -397,7 +397,7 @@ Transfer: {
   bankAccount: "Compte bancaire",
   bankCard: "Carte Bancaire",
   recipientAccount: "Compte bénéficiaire",
-  selectRecipient: "Sélectionnez un compte bénéficiaire",
+  selectRecipient: "Sélectionnez un bénéficiaire",
   noRecipients: "Aucun bénéficiaire enregistré",
   addNewRecipient: "Ajouter un nouveau bénéficiaire",
   verificationTime: "L'ajout d'un nouveau bénéficiaire peut prendre 24 à 72 heures pour vérification.",

@@ -15,7 +15,7 @@ export default function RecipientList() {
     <div className="">
       <div>
         <div className="mb-4 flex justify-between">
-          <h1 className="text-xl font-bold">{t('RecipientListPage.title')}</h1>  
+          <h1 className="md:text-xl font-bold">{t('RecipientListPage.title')}</h1>  
           <Link 
             href="/customer/recipient/add" 
             className="block flex gap-1 items-center text-sm text-green-700 font-semibold hover:text-green-900"

@@ -111,9 +111,9 @@ export default function AddRecipient() {
   return (
     <div>
       <div className="mb-4">
-        <h1 className="text-xl font-bold">{t('AddRecipientPage.title')}</h1>  
+        <h1 className="md:text-xl text-sm font-bold">{t('AddRecipientPage.title')}</h1>  
       </div>
-      <div className="max-w-2xl mx-auto p-6 space-y-6">
+      <div className="max-w-2xl mx-auto p-4 space-y-6">
         {error && (
           <div className="max-w-md mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
             {error}
@@ -126,7 +126,7 @@ export default function AddRecipient() {
                 <div className="text-center space-y-1 mb-5">
                   {user?.bank_account?.map((account) => (
                     <div key={account.id} className="">
-                      <h1 className="font-bold text-xl text-indigo-700 mb-5">
+                      <h1 className="font-bold md:text-xl text-sm text-indigo-700 mb-5">
                         {t('AddRecipientPage.bankInfo.title')}
                       </h1>
                       <h4>
@@ -217,6 +217,7 @@ export default function AddRecipient() {
                       onValueChange={setRadioValue} 
                       className="flex gap-4"
                     >
+                      <div className="flex flex-col items-center space-y-2 md:flex-row mb-3">
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="iban" id="iban" />
                         <Label htmlFor="iban">
@@ -228,6 +229,7 @@ export default function AddRecipient() {
                         <Label htmlFor="num_banc">
                           {t('AddRecipientPage.form.accountTypeOptions.accountNumber')}
                         </Label>
+                      </div>
                       </div>
                     </RadioGroup>
                   </div>
@@ -271,7 +273,7 @@ export default function AddRecipient() {
                     <h2 className="text-sm text-gray-400">
                       {t('AddRecipientPage.form.bankInfoTitle')}
                     </h2>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 flex-col md:flex-row">
                       <div className="space-y-2">
                         <Label>{t('AddRecipientPage.form.bankName')}</Label>
                         <Input 
@@ -292,12 +294,14 @@ export default function AddRecipient() {
                             <SelectValue placeholder={t('AddRecipientPage.placeholders.currency')} />
                           </SelectTrigger>
                           <SelectContent>
-                            {Object.entries(t('AddRecipientPage.currencies' as any,{})).map(([code, label]) => (
-                              <SelectItem key={code} value={code}>
-                                {label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
+                        <SelectItem value="EUR">Eur(€)</SelectItem>
+                                <SelectItem value="CHF">CHF</SelectItem>
+                                <SelectItem value="NOK">NOK(kr)</SelectItem>
+                                <SelectItem value="PLN">PLN</SelectItem>
+                                <SelectItem value="USD">USD($)</SelectItem>
+                                <SelectItem value="XOF">XOF(FCFA)</SelectItem>
+                                <SelectItem value="XPF">XPF</SelectItem>
+                        </SelectContent>
                         </Select>
                       </div>
                     </div>
