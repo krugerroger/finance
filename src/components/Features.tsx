@@ -158,7 +158,7 @@ export default async function Features() {
           {loans.map((loan, index) => (
             <div key={index} className="space-y-2 border rounded">
               <img 
-                src={`/img${4-index}.png`} 
+                src={`/img${4-index}.webp`} 
                 className="w-auto" 
                 alt={loan.title} 
               />
