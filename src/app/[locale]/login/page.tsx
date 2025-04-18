@@ -127,7 +127,7 @@ export default function LoginPage() {
         <div className="text-center">
           <p className="text-gray-600">
             {t('LoginPage.form.noAccount')}{" "}
-            <Link href="/register" className="text-blue-600 font-semibold hover:underline">
+            <Link href="/register/" className="text-blue-600 font-semibold hover:underline">
               {t('LoginPage.form.registerLink')}
             </Link>
           </p>
