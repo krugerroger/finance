@@ -162,7 +162,7 @@ export default function DetailTransfer() {
                                     {t('TransferDetail.otp.title')}
                                 </h1>
                                 <img
-                                    src="/payments.png"
+                                    src="/payments.webp"
                                     alt="payment method"
                                     width={200}
                                     height={200}

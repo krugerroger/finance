@@ -98,7 +98,7 @@ export default async function Features() {
             </Link>
           </div>
         </div>
-        <div className="bg-[url('/union.jpg')] bg-cover bg-center col-span-1"></div>
+        <div className="bg-[url('/union.webp')] bg-cover bg-center col-span-1"></div>
       </div>
 
       {/* Services */}
@@ -125,7 +125,7 @@ export default async function Features() {
 
       {/* Cartes de crédit */}
       <div id="credit_cards" className=" sm:grid sm:grid-cols-3">
-        <div className="bg-[url('/img1.jpg')] bg-cover bg-center col-span-1"></div>
+        <div className="bg-[url('/img1.webp')] bg-cover bg-center col-span-1"></div>
         <div className="px-6 py-10 bg-gray-900 text-white col-span-2">
           <h1 className="text-4xl font-bold my-5">{t('Features.creditCards.title')}</h1>
           <p className="text-sm my-5">{t('Features.creditCards.description')}</p>
