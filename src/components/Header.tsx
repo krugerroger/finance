@@ -25,10 +25,6 @@ export default async function Header() {
             <PhoneIcon className="w-4" />
             {t('Header.phone')}
           </div>
-          <div className="flex items-center gap-1">
-            <LanguageIcon className="w-4" />
-            {t('Header.language')}
-          </div>
         </div>
       </div>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
