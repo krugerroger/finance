@@ -75,10 +75,19 @@ export default function AddCards() {
         toast.success(t('AddCardsPage.messages.addSuccess'))
       }
 
-    } catch (error: any) {
-      console.error("Registration error:", error)
-      setError(error.message || t('AddCardsPage.messages.error'))
-      toast.error(t('AddCardsPage.messages.error'))
+    } catch (error: unknown) {
+      console.error("Registration error:", error);
+      
+      let errorMessage = t('AddCardsPage.messages.error');
+      
+      if (error instanceof Error) {
+        errorMessage = error.message || errorMessage;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+    
+      setError(errorMessage);
+      toast.error(errorMessage);
     }
   }
 

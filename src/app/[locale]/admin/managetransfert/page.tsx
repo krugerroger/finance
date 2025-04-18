@@ -10,7 +10,6 @@ import { toast } from 'sonner'
 export default function AdminPageTransfert() {
   const supabase = createClientComponentClient()
   const [transfers, setTransfers] = useState<any[]>([])
-  const [userProfiles, setUserProfiles] = useState<Record<string, any>>({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function AdminPageTransfert() {
       })
 
       setTransfers(transfersData || [])
-      setUserProfiles(profilesMap)
+
     } catch (error) {
       console.error('Error fetching data:', error)
       toast.error('Erreur lors du chargement des données')

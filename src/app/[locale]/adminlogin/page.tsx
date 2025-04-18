@@ -31,25 +31,22 @@ export default function AdminLogin() {
         throw authError
       }
 
-      // 3. Vérification supplémentaire du rôle (optionnel mais recommandé)
-      const { data: userData } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('user_id', data.user?.id)
-        .single()
-
       // 4. Redirection si tout est valide
       router.push("/admin/manageusers")
 
-    } catch (error: any) {
-      console.error("Erreur de connexion:", error)
+    } catch (error: unknown) {
+      console.error("Erreur de connexion:", error);
       
-      if (error.message.includes("Invalid login credentials")) {
-        setError("Email ou mot de passe incorrect")
-      } else if (error.message.includes("Email not confirmed")) {
-        setError("Veuillez confirmer votre email avant de vous connecter")
+      if (error instanceof Error) {
+        if (error.message.includes("Invalid login credentials")) {
+          setError("Email ou mot de passe incorrect");
+        } else if (error.message.includes("Email not confirmed")) {
+          setError("Veuillez confirmer votre email avant de vous connecter");
+        } else {
+          setError("Une erreur est survenue lors de la connexion");
+        }
       } else {
-        setError("Une erreur est survenue lors de la connexion")
+        setError("Erreur inconnue");
       }
     }
   }

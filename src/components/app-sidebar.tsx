@@ -10,6 +10,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { useI18n } from "../../locales/client"
+import Link from "next/link"
 
 interface AppSidebarProps {
   transfertData?: any[]
@@ -104,10 +105,10 @@ export function AppSidebar({ transfertData }: AppSidebarProps) {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -120,10 +121,10 @@ export function AppSidebar({ transfertData }: AppSidebarProps) {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/contact">
+                  <Link href="/contact">
                     <Inbox />
                     <span>{t('AppSidebar.items.contact')}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

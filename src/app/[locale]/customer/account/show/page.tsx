@@ -4,20 +4,19 @@ import { CircleCheck, KeyRound, Mail, User, Calendar, Smartphone, Home, Transgen
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/app/[locale]/context/UserContext";
 import { useI18n } from "../../../../../../locales/client";
 
 export default function ShowAccount() {
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
   const router = useRouter();
   const { user, isLoading, supabase } = useUser();
   const t = useI18n();
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, ) => {
       if (event === 'SIGNED_OUT') {
         router.push('/login');
       }

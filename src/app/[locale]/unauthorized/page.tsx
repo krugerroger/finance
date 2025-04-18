@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useI18n } from "../../../../locales/client";
+import Link from "next/link";
 
 export default function UnauthorizedPage() {
   const t = useI18n();
@@ -27,12 +28,12 @@ export default function UnauthorizedPage() {
         <p className="text-gray-700 mb-6">
           {t('Unauthorized.redirect')}
         </p>
-        <a 
+        <Link
           href="/" 
           className="text-blue-500 hover:underline transition-colors"
         >
           {t('Unauthorized.manualReturn')}
-        </a>
+        </Link>
       </div>
     </div>
   );

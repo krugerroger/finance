@@ -377,9 +377,9 @@ export default function RegistrationForm() {
             <p className="text-xs">
               {t('Registration.privacyPolicy', {
                 privacyPolicy: (
-                  <a href="#" className="text-blue-600 underline">
+                  <Link href="#" className="text-blue-600 underline">
                     {t('privacyPolicy' as any, {})}
-                  </a>
+                  </Link>
                 )
               })}
             </p>

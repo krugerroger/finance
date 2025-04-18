@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {  ChevronRightIcon,EnvelopeIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
-import Image from "next/image"
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp"
 import { useUser } from "@/app/[locale]/context/UserContext"
 import { useRouter } from "next/navigation"
@@ -162,7 +161,7 @@ export default function DetailTransfer() {
                                 <h1 className="font-bold text-lg text-gray-700">
                                     {t('TransferDetail.otp.title')}
                                 </h1>
-                                <Image
+                                <img
                                     src="/payments.png"
                                     alt="payment method"
                                     width={200}

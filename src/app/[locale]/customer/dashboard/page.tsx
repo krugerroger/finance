@@ -12,7 +12,7 @@ import { useI18n } from "../../../../../locales/client"
 
 export default function Dashboard() {
     const { user, supabase, isLoading } = useUser()
-    const [error, setError] = useState<string | null>(null)
+    const [error] = useState<string | null>(null)
     const router = useRouter()
     const t = useI18n()
 

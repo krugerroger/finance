@@ -7,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Image from "next/image";
 import { ComponentProps } from "react";
 
 const languageOptions = [
@@ -63,7 +62,7 @@ export const LocaleSelect = ({
     >
       <SelectTrigger className={`w-[150px] gap-2 ${triggerClassName}`}>
         {currentLanguage && (
-          <Image
+          <img
             src={currentLanguage.flag}
             alt={currentLanguage.label}
             width={20}
@@ -77,7 +76,7 @@ export const LocaleSelect = ({
         {languageOptions.map((language) => (
           <SelectItem key={language.value} value={language.value}>
             <div className="flex items-center gap-2">
-              <Image
+              <img
                 src={language.flag}
                 alt={language.label}
                 width={20}

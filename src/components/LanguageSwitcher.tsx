@@ -57,7 +57,7 @@ export default function LanguageSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-2">
-          <Image
+          <img
             src={currentLanguage.flag}
             alt={currentLanguage.name}
             width={20}
@@ -74,7 +74,7 @@ export default function LanguageSwitcher() {
             onClick={() => changeLanguage(language.code)}
             className="flex items-center gap-2"
           >
-            <Image
+            <img
               src={language.flag}
               alt={language.name}
               width={20}

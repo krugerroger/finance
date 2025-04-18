@@ -6,9 +6,20 @@ import { supabase } from "@/lib/supabase"
 import { useState, useEffect } from "react"
 import { toast } from "sonner"
 
+interface User {
+  id: string;
+  email: string;
+  nom: string;
+  prenom: string;
+  created_at: string;
+  password: string;
+  status: 'pending' | 'approved' | 'rejected';
+  // Ajoutez d'autres champs nécessaires
+}
+
 export default function AdminPage() {
     // ... (states existants)
-    const [pendingUsers, setPendingUsers] = useState<any[]>([])
+    const [pendingUsers, setPendingUsers] = useState<User[]>([])
   
     useEffect(() => {
       fetchPendingUsers()
@@ -106,7 +117,7 @@ export default function AdminPage() {
         .update({ status: 'rejected' })
         .eq('id', userId)
   
-      if (error) {
+      if (error instanceof Error) {
         toast.error("Erreur lors du rejet")
       } else {
         toast.success('Utilisateur rejeté')
