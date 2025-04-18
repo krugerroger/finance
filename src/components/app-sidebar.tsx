@@ -13,7 +13,7 @@ import { useI18n } from "../../locales/client"
 import Link from "next/link"
 
 interface AppSidebarProps {
-  transfertData?: any[]
+  transfertData?: any
 }
 
 export function AppSidebar({ transfertData }: AppSidebarProps) {
