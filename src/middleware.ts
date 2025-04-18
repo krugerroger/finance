@@ -81,7 +81,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|register).*)', // Ajoutez 'images' si vous avez un dossier dédié
+    '/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)',
     '/customer/:path*',
     '/admin/:path*'
   ]
