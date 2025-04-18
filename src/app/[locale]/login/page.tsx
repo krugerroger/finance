@@ -57,7 +57,7 @@ export default function LoginPage() {
       <div className="max-w-2xl w-full space-y-6">
         <div className="text-center">
         <div className=" flex justify-center items-center mb-4">
-           <Link href="/"> <img src="/logo2.png" alt="Finance Logo" className="h-10" /></Link>
+            <Link href="/"><img src="/logo2.png" alt="Finance Logo" className="h-10" /></Link>
         </div>
           <p className="text-gray-600 mb-6">
             {t('LoginPage.subtitle')}

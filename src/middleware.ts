@@ -10,6 +10,12 @@ const I18nMiddleware = createI18nMiddleware({
 
 // Ajoutez explicitement toutes les versions localisées des routes de login
 const PUBLIC_ROUTES = [
+  '/',                 // Nouveau
+  '/en',               // Nouveau
+  '/fr',               // Nouveau
+  '/de',               // Nouveau
+  '/es',               // Nouveau
+  '/pt', 
   '/login',
   '/en/login',
   '/fr/login',
@@ -33,7 +39,10 @@ export async function middleware(request: NextRequest) {
   
   // 1. D'abord vérifier les routes publiques
   if (PUBLIC_ROUTES.some(route => {
-    return pathname === route || pathname.startsWith(`${route}/`)
+    // Compare en ignorant le trailing slash
+    const normalizedPath = pathname.replace(/\/$/, '')
+    const normalizedRoute = route.replace(/\/$/, '')
+    return normalizedPath === normalizedRoute || pathname.startsWith(`${route}/`)
   })) {
     return I18nMiddleware(request)
   }
