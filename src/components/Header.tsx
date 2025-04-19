@@ -13,10 +13,10 @@ export default async function Header() {
        <LocaleSelect className="fixed top-0 left-0 z-50"/>
       <div className="text-[10px] bg-gray-100 p-2 flex justify-between items-center">
         <div className="flex justify-start">
-          <MapPinIcon className="w-4 text-indigo-700" />
+          <MapPinIcon className="w-6 text-indigo-700" />
           {t('Header.address')}
         </div>
-        <div className="flex justify-end gap-3 font-semibold text-indigo-900">
+        <div className="flex flex-col md:flex-row justify-end gap-1 font-semibold text-indigo-900">
           <div className="flex items-center gap-1">
             <EnvelopeIcon className="w-4 text-indigo-900" />
             <span>{t('Header.email')}</span>
