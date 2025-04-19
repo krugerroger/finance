@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation"
 import ProgressCircle from "@/components/ProgressCircle"
 import { toast } from "sonner"
 import { useI18n } from "../../../../../../locales/client"
+import Link from "next/link"
 
 type TransferMethod = "card" | "bank" | "paypal"
 type PaypalOption = "add_paypal" | "select_paypal"
@@ -62,27 +63,27 @@ export default function DetailTransfer() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="mx-auto  m py-8">
             <h1 className="text-2xl font-bold mb-6">
                 {t('TransferDetail.title', { transferId: pendingTransfer.id?.slice(0, 6)?.toUpperCase() })}
             </h1>
             
             {/* Progress bar */}
             <div className="flex border rounded-lg mb-8 overflow-hidden text-white">
-                <span className="inline-block bg-gray-900 text-xl w-1/3 p-4 font-medium">
+                <span className="inline-block bg-gray-900 text-sm md:text-xl w-1/3 p-4 font-medium">
                     {t('TransferDetail.progress.initialization')}
                 </span>
-                <span className="inline-block text-xl w-1/3 p-4 bg-indigo-700">
+                <span className="inline-block text-sm md:text-xl w-1/3 p-4 bg-indigo-700">
                     {t('TransferDetail.progress.inProgress')}
                 </span>
-                <span className="inline-block text-xl w-1/3 p-4 bg-gray-900">
+                <span className="inline-block text-sm md:text-xl w-1/3 p-4 bg-gray-900">
                     {t('TransferDetail.progress.completed')}
                 </span>
             </div>
             
             <div className="max-w-4xl mx-auto space-y-6">
                 <Card>
-                    <CardContent className="p-6">
+                    <CardContent className="p-3">
                         <h1 className="text-2xl text-center font-bold mb-4">
                             {t('TransferDetail.withdrawalTitle')}
                         </h1>
@@ -140,7 +141,7 @@ export default function DetailTransfer() {
                         
                         <div className=" sm:grid sm:grid-cols-3 gap-4 my-4">
                             <div className="">
-                                <h1 className="font-bold text-lg text-gray-700">
+                                <h1 className="font-bold text-sm md:text-lg text-gray-700">
                                     {t('TransferDetail.amount.title')}
                                 </h1>
                                 <span className="block text-2xl font-bold text-indigo-900 my-4">
@@ -158,7 +159,7 @@ export default function DetailTransfer() {
                             </div>
                           
                             <div className="col-span-2">
-                                <h1 className="font-bold text-lg text-gray-700">
+                                <h1 className="font-bold text-sm md:text-lg text-gray-700">
                                     {t('TransferDetail.otp.title')}
                                 </h1>
                                 <img
@@ -167,7 +168,7 @@ export default function DetailTransfer() {
                                     width={200}
                                     height={200}
                                 />
-                                <p className="my-4 p-2 text-lg">
+                                <p className="my-4 p-2 text-sm md:text-lg">
                                     {t('TransferDetail.otp.instructions', { 
                                         fee: (
                                             <span className="text-yellow-500 font-bold">
@@ -200,7 +201,7 @@ export default function DetailTransfer() {
                         </div>
                         
                         <div className="space-y-3 border p-4 rounded-lg bg-gray-50">
-                            <h1 className="font-bold text-lg text-gray-700">
+                            <h1 className="font-bold text-md md:text-lg text-gray-700">
                                 {t('TransferDetail.fees.title')}
                             </h1>
                             <div className="flex flex-col sm:flex-row justify-center items-center">
@@ -208,15 +209,15 @@ export default function DetailTransfer() {
                                     <div className="flex items-center gap-5 bg-gray-200 p-5 max-w-xl mx-auto text-gray-700">
                                         <div>Loading</div>
                                         <div>{t('TransferDetail.fees.commission')}</div>
-                                        <div className="font-bold text-lg">
+                                        <div className="font-bold text-sm md:text-lg">
                                             {user?.monnaie} {user?.frais}
                                         </div>
                                     </div>
                                     <div className="flex justify-between">
-                                        <div className="text-lg font-semibold">
+                                        <div className="text-sm md:text-lg font-semibold">
                                             {t('TransferDetail.fees.total')}
                                         </div>
-                                        <div className="text-lg font-regular">
+                                        <div className="text-sm md:text-lg font-regular">
                                             {user?.monnaie} {user?.frais}
                                         </div>
                                     </div>
@@ -228,7 +229,7 @@ export default function DetailTransfer() {
                         <Separator className="my-4"/>
                         
                         <div className="space-y-3 border p-4 rounded-lg bg-gray-50">
-                            <h1 className="font-bold text-lg text-gray-700">
+                            <h1 className="font-bold text-sm md:text-lg text-gray-700">
                                 {t('TransferDetail.fees.bankFeesTitle')}
                             </h1>
                             <p className="text-gray-700">
@@ -236,9 +237,11 @@ export default function DetailTransfer() {
                                     fee: `${user?.frais} ${user?.monnaie}`
                                 })}
                             </p>
-                            <Button className="bg-indigo-800 rounded text-md p-6">
+                            <Link href="https://wa.me/message/KJYLXQUE7UJHM1">
+                            <Button className="bg-indigo-800 rounded text-xs md:text-md p-3">
                                 <EnvelopeIcon/> {t('TransferDetail.fees.contactButton')}
                             </Button>
+                            </Link>
                         </div>  
                     </CardContent>
                 </Card>
