@@ -86,7 +86,7 @@ export default function AdminPage() {
   )
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-2 space-y-8">
       <h1 className="text-2xl font-bold">Gestion des comptes</h1>
 
       <div className="border rounded-lg overflow-hidden">

@@ -73,7 +73,7 @@ export default function AdminPageTransfert() {
   )
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-2 space-y-8">
       <h1 className="text-2xl font-bold">Administration</h1>
 
       {/* Section Transferts */}

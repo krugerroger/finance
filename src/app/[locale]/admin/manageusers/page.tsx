@@ -126,7 +126,7 @@ export default function AdminPage() {
     }
   
     return (
-      <div className="p-8 space-y-8">
+      <div className="p-2 space-y-8">
         {/* ... Sections existantes ... */}
   
         {/* Nouvelle section pour les validations */}
