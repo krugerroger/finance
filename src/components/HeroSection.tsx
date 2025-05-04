@@ -7,7 +7,7 @@ export default async function HeroSection() {
   const t =await getI18n();
 
   return (
-    <section className="flex items-center relative bg-blue-50 py-16 bg-[url('/home.jpeg')] bg-cover bg-local h-screen bg-center bg-no-repeat">
+    <section className="flex items-center relative bg-blue-50 py-16 bg-[url('/home.jpeg')] bg-cover bg-local h-[500px] bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-black opacity-50" />
       <div className="relative z-1 container mx-auto px-4 flex flex-col md:flex-row items-center">
         <div className="md:w-2/3 mb-8 md:mb-0">
