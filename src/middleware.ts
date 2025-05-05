@@ -8,44 +8,78 @@ const I18nMiddleware = createI18nMiddleware({
   urlMappingStrategy: 'redirect'
 })
 
+// Ajoutez explicitement toutes les versions localisées des routes de login
+const PUBLIC_ROUTES = [
+  '/',                 // Nouveau
+  '/en',               // Nouveau
+  '/fr',               // Nouveau
+  '/de',               // Nouveau
+  '/es',               // Nouveau
+  '/pt', 
+  '/login',
+  '/en/login',
+  '/fr/login',
+  '/de/login',
+  '/es/login',
+  '/pt/login',
+  '/register',
+  '/en/register',
+  '/fr/register',
+  '/de/register',
+  '/es/register',
+  '/pt/register',
+  '/adminlogin', 
+  '/en/adminlogin',
+  '/fr/adminlogin',
+  '/de/adminlogin',
+  '/es/adminlogin',
+  '/pt/adminlogin',
+  '/unauthorized',
+  '/api/auth',
+  '/favicon.ico',
+  '/robots.txt'
+]
+
 export async function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone()
-  const pathname = url.pathname
-
-  // Étape 1: Gestion spéciale de la racine
-  if (pathname === '/') {
-    const acceptLanguage = request.headers.get('accept-language')
-    const locale = acceptLanguage?.split(',')?.[0]?.split('-')?.[0]?.toLowerCase() || 'en'
-    const supportedLocales = ['en', 'fr', 'de', 'es', 'pt']
-    const finalLocale = supportedLocales.includes(locale) ? locale : 'en'
-    return NextResponse.redirect(new URL(`/${finalLocale}`, request.url))
+  const { pathname } = request.nextUrl
+  
+  // 1. D'abord vérifier les routes publiques
+  if (PUBLIC_ROUTES.some(route => {
+    // Compare en ignorant le trailing slash
+    const normalizedPath = pathname.replace(/\/$/, '')
+    const normalizedRoute = route.replace(/\/$/, '')
+    return normalizedPath === normalizedRoute || pathname.startsWith(`${route}/`)
+  })) {
+    return I18nMiddleware(request)
   }
 
-  // Étape 2: Traitement i18n
+  // 2. Ensuite le traitement i18n
   const response = I18nMiddleware(request)
-  const locale = url.locale || 'en'
 
-  // Étape 3: Définir le header pour éviter la cache des redirections
-  response.headers.set('Cache-Control', 'no-store, max-age=0')
-
-  // Étape 4: Vérifier les routes publiques
-  const PUBLIC_ROUTES = [
-    `/${locale}`, // Page d'accueil localisée
-    '/login',
-    '/adminlogin',
-    '/unauthorized'
-  ]
-
-  if (PUBLIC_ROUTES.some(publicPath => pathname === publicPath)) {
-    return response
-  }
-
-  // Étape 5: Authentification pour les routes protégées
+  // 3. Authentification
   const supabase = createMiddlewareClient({ req: request, res: response })
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
+    const locale = pathname.split('/')[1] || 'en'
+    if (pathname.includes('/admin')) {
+      return NextResponse.redirect(new URL(`/${locale}/adminlogin`, request.url))
+    }
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
+  }
+
+  // 4. Vérification admin
+  if (pathname.includes('/admin')) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('user_id', session.user.id)
+      .single()
+
+    if (!profile || profile.role !== 'admin') {
+      const locale = pathname.split('/')[1] || 'en'
+      return NextResponse.redirect(new URL(`/${locale}/unauthorized`, request.url))
+    }
   }
 
   return response
@@ -53,7 +87,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/',
-    '/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)'
+    '/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)',
+    '/customer/:path*',
+    '/admin/:path*'
   ]
 }
