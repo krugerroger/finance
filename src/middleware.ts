@@ -22,7 +22,12 @@ const PUBLIC_ROUTES = [
   '/de/login',
   '/es/login',
   '/pt/login',
-
+  '/register',
+  '/en/register',
+  '/fr/register',
+  '/de/register',
+  '/es/register',
+  '/pt/register',
   '/adminlogin', 
   '/en/adminlogin',
   '/fr/adminlogin',
