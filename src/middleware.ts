@@ -1,4 +1,4 @@
-Optimise moi ce code : import { createI18nMiddleware } from 'next-international/middleware'
+import { createI18nMiddleware } from 'next-international/middleware'
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse, type NextRequest } from 'next/server'
 
