@@ -1,75 +1,74 @@
-import { createI18nMiddleware } from 'next-international/middleware'
+Optimise moi ce code : import { createI18nMiddleware } from 'next-international/middleware'
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse, type NextRequest } from 'next/server'
 
-// Config i18n
-const locales = ['en', 'fr', 'de', 'es', 'pt'] as const
-const defaultLocale = 'en'
-
 const I18nMiddleware = createI18nMiddleware({
-  locales,
-  defaultLocale,
+  locales: ['en', 'fr', 'de', 'es', 'pt'],
+  defaultLocale: 'en',
   urlMappingStrategy: 'redirect'
 })
 
-// Configuration des redirections de base
-const handleBaseRedirects = (request: NextRequest) => {
-  const url = request.nextUrl.clone()
-  
-  // 1. Forcer HTTPS
-  if (url.protocol === 'http:') {
-    url.protocol = 'https:'
-    return NextResponse.redirect(url)
-  }
+// Ajoutez explicitement toutes les versions localisées des routes de login
+const PUBLIC_ROUTES = [
+  '/',                 // Nouveau
+  '/en',               // Nouveau
+  '/fr',               // Nouveau
+  '/de',               // Nouveau
+  '/es',               // Nouveau
+  '/pt', 
+  '/login',
+  '/en/login',
+  '/fr/login',
+  '/de/login',
+  '/es/login',
+  '/pt/login',
+  '/register',
+  '/en/register',
+  '/fr/register',
+  '/de/register',
+  '/es/register',
+  '/pt/register',
+  '/adminlogin', 
+  '/en/adminlogin',
+  '/fr/adminlogin',
+  '/de/adminlogin',
+  '/es/adminlogin',
+  '/pt/adminlogin',
+  '/unauthorized',
+  '/api/auth',
+  '/favicon.ico',
+  '/robots.txt'
+]
 
-  // 2. Forcer www (ou l'inverse selon votre préférence)
-  if (!url.hostname.startsWith('www.')) {
-    url.hostname = `www.${url.hostname}`
-    return NextResponse.redirect(url)
-  }
-
-  return null
-}
-
-// Middleware principal
 export async function middleware(request: NextRequest) {
-  // Gestion des redirections de base (HTTPS et www)
-  const baseRedirect = handleBaseRedirects(request)
-  if (baseRedirect) return baseRedirect
-
   const { pathname } = request.nextUrl
-  const normalizedPath = pathname.replace(/\/$/, '')
-
-  // Liste des routes publiques optimisée
-  const isPublicRoute = [
-    '/', '/login', '/register', '/adminlogin', '/unauthorized',
-    '/api/auth', '/favicon.ico', '/robots.txt'
-  ].some(route => {
-    const baseRoute = route === '/' ? '' : route
-    return normalizedPath === baseRoute || 
-           normalizedPath.startsWith(`${baseRoute}/`) ||
-           locales.some(locale => normalizedPath === `/${locale}${baseRoute}` || 
-                                normalizedPath.startsWith(`/${locale}${baseRoute}/`))
-  })
-
-  if (isPublicRoute) {
+  
+  // 1. D'abord vérifier les routes publiques
+  if (PUBLIC_ROUTES.some(route => {
+    // Compare en ignorant le trailing slash
+    const normalizedPath = pathname.replace(/\/$/, '')
+    const normalizedRoute = route.replace(/\/$/, '')
+    return normalizedPath === normalizedRoute || pathname.startsWith(`${route}/`)
+  })) {
     return I18nMiddleware(request)
   }
 
-  // Traitement i18n
+  // 2. Ensuite le traitement i18n
   const response = I18nMiddleware(request)
 
-  // Authentification
+  // 3. Authentification
   const supabase = createMiddlewareClient({ req: request, res: response })
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
-    const locale = locales.find(l => pathname.startsWith(`/${l}/`)) || defaultLocale
-    const redirectPath = pathname.includes('/admin') ? 'adminlogin' : 'login'
-    return NextResponse.redirect(new URL(`/${locale}/${redirectPath}`, request.url))
+    const locale = pathname.split('/')[1] || 'en'
+    if (pathname.includes('/admin')) {
+      return NextResponse.redirect(new URL(`/${locale}/adminlogin`, request.url))
+    }
+    return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
   }
 
-  // Vérification admin
+  // 4. Vérification admin
   if (pathname.includes('/admin')) {
     const { data: profile } = await supabase
       .from('profiles')
@@ -78,7 +77,7 @@ export async function middleware(request: NextRequest) {
       .single()
 
     if (!profile || profile.role !== 'admin') {
-      const locale = locales.find(l => pathname.startsWith(`/${l}/`)) || defaultLocale
+      const locale = pathname.split('/')[1] || 'en'
       return NextResponse.redirect(new URL(`/${locale}/unauthorized`, request.url))
     }
   }
