@@ -8,52 +8,44 @@ const I18nMiddleware = createI18nMiddleware({
   urlMappingStrategy: 'redirect'
 })
 
-// Ajoutez explicitement toutes les versions localisées des routes de login
-const PUBLIC_ROUTES = [
-  '/',                 // Nouveau
-  '/en',               // Nouveau
-  '/fr',               // Nouveau
-  '/de',               // Nouveau
-  '/es',               // Nouveau
-  '/pt', 
-  '/login',
-  '/en/login',
-  '/fr/login',
-  '/de/login',
-  '/es/login',
-  '/pt/login',
-  '/register',
-  '/en/register',
-  '/fr/register',
-  '/de/register',
-  '/es/register',
-  '/pt/register',
-  '/adminlogin', 
-  '/en/adminlogin',
-  '/fr/adminlogin',
-  '/de/adminlogin',
-  '/es/adminlogin',
-  '/pt/adminlogin',
-  '/unauthorized',
-  '/api/auth',
-  '/favicon.ico',
-  '/robots.txt'
-]
+// Utilisation d'un Set pour des recherches plus efficaces
+const PUBLIC_ROUTES = new Set([
+  '/', '/login', '/register', '/adminlogin', '/unauthorized',
+  '/api/auth', '/favicon.ico', '/robots.txt'
+])
+
+const LOCALES = ['en', 'fr', 'de', 'es', 'pt']
+
+// Pré-générer toutes les routes localisées pour éviter les répétitions
+function generateLocalizedRoutes(baseRoutes: Set<string>): Set<string> {
+  const allRoutes = new Set(baseRoutes)
+  
+  for (const route of baseRoutes) {
+    if (route.startsWith('/api') || route === '/favicon.ico' || route === '/robots.txt') continue
+    
+    for (const locale of LOCALES) {
+      allRoutes.add(`/${locale}${route === '/' ? '' : route}`)
+    }
+  }
+  
+  return allRoutes
+}
+
+const ALL_PUBLIC_ROUTES = generateLocalizedRoutes(PUBLIC_ROUTES)
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const normalizedPath = pathname.replace(/\/$/, '')
   
-  // 1. D'abord vérifier les routes publiques
-  if (PUBLIC_ROUTES.some(route => {
-    // Compare en ignorant le trailing slash
-    const normalizedPath = pathname.replace(/\/$/, '')
+  // 1. Vérification des routes publiques (plus efficace avec Set)
+  if ([...ALL_PUBLIC_ROUTES].some(route => {
     const normalizedRoute = route.replace(/\/$/, '')
-    return normalizedPath === normalizedRoute || pathname.startsWith(`${route}/`)
+    return normalizedPath === normalizedRoute || normalizedPath.startsWith(`${normalizedRoute}/`)
   })) {
     return I18nMiddleware(request)
   }
 
-  // 2. Ensuite le traitement i18n
+  // 2. Traitement i18n
   const response = I18nMiddleware(request)
 
   // 3. Authentification
@@ -61,14 +53,12 @@ export async function middleware(request: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
-    const locale = pathname.split('/')[1] || 'en'
-    if (pathname.includes('/admin')) {
-      return NextResponse.redirect(new URL(`/${locale}/adminlogin`, request.url))
-    }
-    return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
+    const locale = LOCALES.includes(pathname.split('/')[1]) ? pathname.split('/')[1] : 'en'
+    const redirectPath = pathname.includes('/admin') ? 'adminlogin' : 'login'
+    return NextResponse.redirect(new URL(`/${locale}/${redirectPath}`, request.url))
   }
 
-  // 4. Vérification admin
+  // 4. Vérification admin si nécessaire
   if (pathname.includes('/admin')) {
     const { data: profile } = await supabase
       .from('profiles')
@@ -77,7 +67,7 @@ export async function middleware(request: NextRequest) {
       .single()
 
     if (!profile || profile.role !== 'admin') {
-      const locale = pathname.split('/')[1] || 'en'
+      const locale = LOCALES.includes(pathname.split('/')[1]) ? pathname.split('/')[1] : 'en'
       return NextResponse.redirect(new URL(`/${locale}/unauthorized`, request.url))
     }
   }
