@@ -67,63 +67,46 @@ export default function AddRecipient() {
   }, [user, editMode])
   
  const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    // 1. Récupérer l'utilisateur authentifié
-    const { data: { user: authUser } } = await supabase.auth.getUser();
-    
-    if (!authUser) {
-      throw new Error("User not authenticated");
+    e.preventDefault()
+    try {
+      const payload = {
+        user_id: user?.user_id,
+        account_holder_name: formData.nom_prenom,
+        beneficiary_address: formData.adresse,
+        swift_bic: formData.code_swift,
+        iban: formData.iban,
+        country: formData.pays,
+        account_number: formData.numero_de_compte,
+        currency_code: formData.monnaie,
+        bank_name: formData.nom_banque,
+        bank_address: formData.adresse_banque,
+        account_type: radioValue,
+      }
+
+      if (user?.bank_account?.length) {
+        const { error: updateError } = await supabase
+          .from('bank_accounts')
+          .update(payload)
+          .eq('user_id', user?.user_id)
+
+        if (updateError) throw updateError
+
+        toast.success(t('AddRecipientPage.messages.updateSuccess'))
+      } else {
+        const { error: insertError } = await supabase
+          .from('bank_accounts')
+          .insert(payload)
+
+        if (insertError) throw insertError
+        toast.success(t('AddRecipientPage.messages.addSuccess'))
+      }
+
+    } catch (error: any) {
+      console.error("Registration error:", error)
+      setError(error.message || t('AddRecipientPage.messages.error'))
+      toast.error(t('AddRecipientPage.messages.error'))
     }
-
-    // 2. Préparer le payload avec l'UID de Supabase Auth
-    const payload = {
-      user_id: authUser.id, // Utilisez authUser.id au lieu de user?.user_id
-      account_holder_name: formData.nom_prenom,
-      beneficiary_address: formData.adresse,
-      swift_bic: formData.code_swift,
-      iban: formData.iban,
-      country: formData.pays,
-      account_number: formData.numero_de_compte,
-      currency_code: formData.monnaie,
-      bank_name: formData.nom_banque,
-      bank_address: formData.adresse_banque,
-      account_type: radioValue,
-    };
-
-    // 3. Vérifier si l'utilisateur a déjà un compte bancaire
-    const { data: existingAccounts, error: fetchError } = await supabase
-      .from('bank_accounts')
-      .select('*')
-      .eq('user_id', authUser.id);
-
-    if (fetchError) throw fetchError;
-
-    // 4. Opération d'insertion ou mise à jour
-    if (existingAccounts?.length) {
-      const { error: updateError } = await supabase
-        .from('bank_accounts')
-        .update(payload)
-        .eq('user_id', authUser.id);
-
-      if (updateError) throw updateError;
-      toast.success(t('AddRecipientPage.messages.updateSuccess'));
-    } else {
-      const { error: insertError } = await supabase
-        .from('bank_accounts')
-        .insert(payload);
-
-      if (insertError) throw insertError;
-      toast.success(t('AddRecipientPage.messages.addSuccess'));
-    }
-
-  } catch (error: any) {
-    console.error("Registration error:", error);
-    setError(error.message || t('AddRecipientPage.messages.error'));
-    toast.error(t('AddRecipientPage.messages.error'));
-  }
-};
-
+  };
   return (
     <div>
       <div className="mb-4">
