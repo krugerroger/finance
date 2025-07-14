@@ -128,7 +128,7 @@ export default function RegistrationForm() {
             {error && <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">{error}</div>}
             
             {currentStep === 1 && (
-              <Card className="shadow-lg p-6 rounded-2xl">
+              <Card className="shadow-lg p-3 min-sm:p-6 rounded-2xl">
                 <CardContent className="space-y-2 md:grid-cols-2 md:grid gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="nom">{t('Registration.form.lastName')}</Label>
@@ -271,7 +271,7 @@ export default function RegistrationForm() {
             )}
   
             {currentStep === 2 && (
-              <Card className="shadow-lg p-6 rounded-2xl">
+              <Card className="shadow-lg p-3 min-sm:p-6 rounded-2xl">
                 <CardContent className="space-y-4"> 
                   <div className="md:grid-cols-2 md:grid gap-4">
                     <div className="space-y-2">
