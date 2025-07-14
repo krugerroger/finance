@@ -221,6 +221,7 @@ export default function RegistrationForm() {
                         <SelectItem value="GP">Guadeloupe</SelectItem>
                         <SelectItem value="GT">Guatemala</SelectItem>
                         <SelectItem value="CI">Ivory Coast</SelectItem>
+                        <SelectItem value="IT">Italy</SelectItem>
                         <SelectItem value="MG">Madagascar</SelectItem>
                         <SelectItem value="MQ">Martinique</SelectItem>
                         <SelectItem value="NC">New Caledonia</SelectItem>
